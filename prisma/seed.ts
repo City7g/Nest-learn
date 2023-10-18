@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { PrismaClient } from '@prisma/client'
+import * as bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
 
@@ -9,7 +10,7 @@ const main = async () => {
       data: {
         name: faker.person.fullName(),
         email: faker.internet.email(),
-        password: faker.internet.password(),
+        password: bcrypt.hashSync(faker.internet.password(), 10),
       },
     })
 
