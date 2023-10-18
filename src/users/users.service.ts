@@ -58,6 +58,9 @@ export class UsersService {
         if (error.code === 'P2002')
           throw new Error('User with this email already exists.')
       }
+      if (error instanceof Prisma.PrismaClientValidationError) {
+        throw new Error('Validation error')
+      }
       throw new Error('Server error')
     }
   }
@@ -75,6 +78,9 @@ export class UsersService {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2025')
           throw new Error("User with this id don't exists.")
+      }
+      if (error instanceof Prisma.PrismaClientValidationError) {
+        throw new Error('Validation error')
       }
       throw new Error('Server error')
     }
