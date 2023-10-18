@@ -31,6 +31,22 @@ export class UsersService {
     }
   }
 
+  async findUserByEmail(email: string) {
+    try {
+      return await this.prisma.user.findUniqueOrThrow({
+        where: {
+          email,
+        },
+      })
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2025')
+          throw new Error("User with this id don't exists.")
+      }
+      throw new Error('Server error')
+    }
+  }
+
   async createUser(dto: CreateUsersDto): Promise<User> {
     try {
       return await this.prisma.user.create({
