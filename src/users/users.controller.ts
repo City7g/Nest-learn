@@ -15,11 +15,6 @@ import { UpdateUsersDto } from './dto/update.dto'
 import { CreateUsersDto } from './dto/create.dto'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { UserEntity, UserListResponse } from './entity/user.entity'
-import * as bcrypt from 'bcrypt'
-
-// type User = {
-//   name: string
-// }
 
 @Controller('users')
 @ApiTags('Users')
